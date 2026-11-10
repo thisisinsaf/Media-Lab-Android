@@ -1,0 +1,118 @@
+package org.gradle.wrapper;
+
+import java.io.*;
+import java.net.*;
+import java.nio.file.*;
+import java.security.*;
+import java.util.*;
+import java.util.zip.*;
+
+/**
+ * Small, dependency-free Gradle distribution bootstrapper provided because the
+ * standard wrapper JAR could not be downloaded in the packaging environment.
+ * This class is NOT the official Gradle wrapper; it downloads only the official
+ * distribution URL and checks its published SHA-256 before running Gradle.
+ */
+public final class GradleWrapperMain {
+    private GradleWrapperMain() {}
+
+    public static void main(String[] args) throws Exception {
+        Path ownJar = Paths.get(GradleWrapperMain.class.getProtectionDomain()
+                .getCodeSource().getLocation().toURI());
+        Path root = ownJar.toAbsolutePath().getParent().getParent().getParent();
+        Properties properties = new Properties();
+        try (InputStream in = Files.newInputStream(root.resolve("gradle/wrapper/gradle-wrapper.properties"))) {
+            properties.load(in);
+        }
+        String distributionUrl = Objects.requireNonNull(properties.getProperty("distributionUrl"));
+        String expectedSha256 = Objects.requireNonNull(properties.getProperty("distributionSha256Sum"));
+        String zipName = distributionUrl.substring(distributionUrl.lastIndexOf('/') + 1);
+        String gradleVersion = zipName.replace("-bin.zip", "");
+
+        String gradleUserHome = System.getenv("GRADLE_USER_HOME");
+        Path userHome = gradleUserHome != null && !gradleUserHome.isBlank()
+                ? Paths.get(gradleUserHome) : Paths.get(System.getProperty("user.home"), ".gradle");
+        Path cache = userHome.resolve("wrapper/dists/cse489-verified-" + gradleVersion);
+        Path install = cache.resolve(gradleVersion);
+        boolean windows = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win");
+        Path bin = install.resolve(windows ? "bin/gradle.bat" : "bin/gradle");
+        Path ready = cache.resolve(".verified-installed");
+
+        if (!Files.exists(ready) || !Files.exists(bin)) {
+            Files.createDirectories(cache);
+            Path archive = cache.resolve(zipName);
+            if (!Files.exists(archive) || !sha256(archive).equalsIgnoreCase(expectedSha256)) {
+                System.out.println("Downloading verified Gradle: " + distributionUrl);
+                Path temp = cache.resolve(zipName + ".part");
+                download(distributionUrl, temp);
+                if (!sha256(temp).equalsIgnoreCase(expectedSha256)) {
+                    Files.deleteIfExists(temp);
+                    throw new SecurityException("Gradle distribution SHA-256 mismatch");
+                }
+                Files.move(temp, archive, StandardCopyOption.REPLACE_EXISTING);
+            }
+            System.out.println("Extracting Gradle distribution (first run only)...");
+            if (Files.exists(install)) deleteRecursively(install);
+            unzip(archive, cache);
+            if (!Files.exists(bin)) throw new IOException("Gradle executable is missing: " + bin);
+            if (!windows) bin.toFile().setExecutable(true);
+            Files.writeString(ready, expectedSha256);
+        }
+
+        ArrayList<String> command = new ArrayList<>();
+        if (windows) { command.add("cmd.exe"); command.add("/c"); }
+        command.add(bin.toString());
+        command.addAll(Arrays.asList(args));
+        Process process = new ProcessBuilder(command)
+                .directory(new File(System.getProperty("user.dir")))
+                .inheritIO()
+                .start();
+        System.exit(process.waitFor());
+    }
+
+    private static void download(String address, Path dest) throws IOException {
+        URLConnection connection = new URL(address).openConnection();
+        connection.setConnectTimeout(20000);
+        connection.setReadTimeout(45000);
+        try (InputStream src = connection.getInputStream()) {
+            Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+
+    private static String sha256(Path path) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        try (InputStream in = Files.newInputStream(path)) {
+            byte[] buffer = new byte[65536];
+            int n;
+            while ((n = in.read(buffer)) >= 0) digest.update(buffer, 0, n);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (byte b : digest.digest()) sb.append(String.format("%02x", b & 0xff));
+        return sb.toString();
+    }
+
+    private static void unzip(Path zip, Path root) throws IOException {
+        Path rootFull = root.toAbsolutePath().normalize();
+        try (ZipInputStream entries = new ZipInputStream(Files.newInputStream(zip))) {
+            ZipEntry entry;
+            while ((entry = entries.getNextEntry()) != null) {
+                Path dest = rootFull.resolve(entry.getName()).normalize();
+                if (!dest.startsWith(rootFull)) throw new SecurityException("Unsafe archive entry");
+                if (entry.isDirectory()) Files.createDirectories(dest);
+                else {
+                    Files.createDirectories(dest.getParent());
+                    Files.copy(entries, dest, StandardCopyOption.REPLACE_EXISTING);
+                }
+                entries.closeEntry();
+            }
+        }
+    }
+
+    private static void deleteRecursively(Path dir) throws IOException {
+        try (var walk = Files.walk(dir)) {
+            for (Path file : walk.sorted(Comparator.reverseOrder()).toList()) {
+                Files.deleteIfExists(file);
+            }
+        }
+    }
+}

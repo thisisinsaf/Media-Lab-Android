@@ -1,0 +1,18 @@
+CSE 489 ASSIGNMENT 2 - ANDROID STUDIO RABBIT
+
+1) Extract CSE489_Media_Broadcast_Lab.zip.
+2) In Android Studio: File > Open > select the CSE489_Media_Broadcast_Lab FOLDER.
+3) Allow Gradle sync to complete (internet needed the first time).
+4) Install Android SDK 35 if Android Studio prompts you.
+5) Create or start an Android emulator and click Run (green triangle).
+
+Features:
+- Drawer -> Broadcast Receiver -> Custom -> enter text -> received by broadcast
+- Drawer -> Broadcast Receiver -> Battery -> battery % from Android OS
+- Drawer -> Image Scale -> photo loaded from internet, pinch-to-zoom
+- Drawer -> Video Player -> built-in MP4, offline
+- Drawer -> Audio Player -> built-in MP3, offline
+
+For a complete setup and troubleshooting guide, see README.md.
+For a step-by-step demonstration plan, see docs/TEST_PLAN.md.
+

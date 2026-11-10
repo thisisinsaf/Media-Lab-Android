@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/canvas" android:orientation="vertical">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/customToolbar" android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" android:background="@color/slate_dark"
+        app:title="Custom broadcast · Step 2" android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_back"
+        app:titleTextColor="@color/white" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="22dp">
+            <TextView style="@style/OverlineText" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="CUSTOM BROADCAST / STEP 02" />
+            <TextView style="@style/TitleLarge" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" android:text="Compose a message" />
+            <TextView style="@style/SectionIntro" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" android:text="Enter a plain-text message. The next activity will register a BroadcastReceiver and receive your message." />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" android:background="@drawable/bg_card"
+                android:orientation="vertical" android:padding="20dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="MESSAGE TO BROADCAST" android:letterSpacing="0.07"
+                    android:textColor="@color/primary" android:textStyle="bold" android:textSize="12sp" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/messageInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp" android:hint="Enter your message"
+                    app:counterEnabled="true" app:counterMaxLength="500">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/messageInput" android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:gravity="top|start"
+                        android:inputType="textMultiLine|textCapSentences" android:maxLength="500"
+                        android:minLines="4" android:maxLines="7" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sendMessageButton" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="20dp"
+                    android:text="Send to receiver  →" />
+            </LinearLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="17dp" android:padding="16dp"
+                android:background="@drawable/bg_rounded_soft"
+                android:text="The message will be transmitted through Android's broadcast system, not just displayed from an Intent extra."
+                android:textColor="@color/ink_secondary" android:textSize="13sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

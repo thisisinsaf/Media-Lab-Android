@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/canvas" android:orientation="vertical">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/resultToolbar" android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" android:background="@color/slate_dark"
+        app:title="Custom broadcast · Step 3" android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_back"
+        app:titleTextColor="@color/white" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="22dp">
+            <TextView style="@style/OverlineText" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="CUSTOM BROADCAST / STEP 03" />
+            <TextView style="@style/TitleLarge" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" android:text="Receiver inbox" />
+            <TextView style="@style/SectionIntro" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="9dp" android:text="This screen listens for an app-scoped custom broadcast action and displays the text its BroadcastReceiver receives." />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="25dp" android:background="@drawable/bg_card"
+                android:orientation="vertical" android:padding="22dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="RECEIVED MESSAGE" android:textColor="@color/aqua"
+                    android:textStyle="bold" android:letterSpacing="0.09" android:textSize="11sp" />
+                <TextView android:id="@+id/receivedMessageText" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:minHeight="100dp"
+                    android:layout_marginTop="13dp" android:text="Waiting for broadcast…"
+                    android:textColor="@color/ink" android:textSize="21sp" android:textStyle="bold" />
+                <TextView android:id="@+id/receiverState" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="14dp"
+                    android:text="Receiver registering…" android:textColor="@color/ink_secondary"
+                    android:textSize="13sp" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/rebroadcastButton"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp" android:text="Send broadcast again" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/editMessageButton"
+                    style="@style/AppButton.Outlined" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                    android:text="Edit message" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

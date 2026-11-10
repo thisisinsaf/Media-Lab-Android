@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ink">#17223B</color>
+    <color name="ink_secondary">#64708A</color>
+    <color name="primary">#5657D9</color>
+    <color name="primary_dark">#403FBD</color>
+    <color name="primary_soft">#F0F0FF</color>
+    <color name="aqua">#11A88F</color>
+    <color name="aqua_soft">#E8FBF5</color>
+    <color name="canvas">#F6F8FC</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="line">#E6EAF1</color>
+    <color name="slate_dark">#101932</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="error">#BA3345</color>
+</resources>

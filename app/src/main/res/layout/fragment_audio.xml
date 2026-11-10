@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="22dp">
+        <TextView style="@style/OverlineText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="04 / PLAYBACK" />
+        <TextView style="@style/TitleLarge" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Audio player" />
+        <TextView style="@style/SectionIntro" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Listen to an original audio sample stored locally in the application." />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="25dp" android:background="@drawable/bg_hero"
+            android:gravity="center_horizontal" android:orientation="vertical" android:padding="24dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="◉" android:textColor="@color/white" android:textSize="72sp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" android:text="SIGNAL STUDY" android:textColor="#E8E6FF"
+                android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.2" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="Demo soundscape" android:textColor="@color/white"
+                android:textSize="23sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" android:text="Built-in MP3 • Offline" android:textColor="#DAE0FF" android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="18dp" android:background="@drawable/bg_card"
+            android:orientation="vertical" android:padding="20dp">
+            <TextView android:id="@+id/audioStatus" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="Ready to play" android:textColor="@color/ink"
+                android:textSize="15sp" android:textStyle="bold" />
+            <SeekBar android:id="@+id/audioSeekBar" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="15dp" android:max="100"
+                android:progressTint="@color/primary" android:thumbTint="@color/primary" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView android:id="@+id/audioElapsed" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="00:00" android:textColor="@color/ink_secondary" android:textSize="12sp" />
+                <TextView android:id="@+id/audioDuration" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="00:00"
+                    android:textColor="@color/ink_secondary" android:textSize="12sp" />
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton android:id="@+id/audioPlayPauseButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="21dp" android:text="Play audio" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/audioReplayButton"
+                style="@style/AppButton.Outlined" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Play from start" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

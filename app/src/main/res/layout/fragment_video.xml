@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="22dp">
+        <TextView style="@style/OverlineText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="03 / PLAYBACK" />
+        <TextView style="@style/TitleLarge" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Video player" />
+        <TextView style="@style/SectionIntro" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:text="Play a bundled MP4 inside the app using Android's built-in media player." />
+
+        <FrameLayout android:layout_width="match_parent" android:layout_height="236dp"
+            android:layout_marginTop="26dp" android:background="@drawable/bg_dark_rounded"
+            android:clipToOutline="true">
+            <VideoView android:id="@+id/localVideoView" android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_gravity="center" />
+            <TextView android:id="@+id/videoOverlay" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_gravity="bottom"
+                android:background="#9A101932" android:gravity="center"
+                android:padding="12dp" android:text="READY TO PLAY • OFFLINE"
+                android:textColor="@color/white" android:textSize="11sp"
+                android:letterSpacing="0.1" />
+        </FrameLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" android:background="@drawable/bg_card"
+            android:orientation="vertical" android:padding="20dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="CSE 489 · Sample Video" android:textColor="@color/ink"
+                android:textSize="17sp" android:textStyle="bold" />
+            <TextView android:id="@+id/videoStatus" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="7dp"
+                android:text="Preparing local video…" android:textColor="@color/ink_secondary"
+                android:textSize="13sp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/videoPlayPauseButton"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="18dp" android:text="Play video" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/videoReplayButton"
+                style="@style/AppButton.Outlined" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Replay from start" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="15dp" android:text="Tap the video while playing for additional playback controls. Internet not required."
+            android:textColor="@color/ink_secondary" android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

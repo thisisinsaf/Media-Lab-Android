@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CSE 489 Media Lab</string>
+    <string name="drawer_header_title">MEDIA LAB</string>
+    <string name="drawer_header_subtitle">CSE 489 · ASSIGNMENT 02</string>
+    <string name="navigation_open">Open navigation drawer</string>
+    <string name="navigation_close">Close navigation drawer</string>
+    <string name="nav_broadcast">Broadcast Receiver</string>
+    <string name="nav_image">Image Scale</string>
+    <string name="nav_video">Video Player</string>
+    <string name="nav_audio">Audio Player</string>
+    <string name="broadcast_custom">Custom broadcast receiver</string>
+    <string name="broadcast_battery">System battery notification receiver</string>
+    <string-array name="broadcast_options">
+        <item>@string/broadcast_custom</item>
+        <item>@string/broadcast_battery</item>
+    </string-array>
+    <string name="image_default_url">https://picsum.photos/id/1018/1200/800</string>
+</resources>
